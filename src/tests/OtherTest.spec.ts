@@ -5,7 +5,6 @@ test("simple login test with self heal", async ({ page }) => {
   const loginPage = new LoginPage(page);
   await loginPage.navigatetoUrl();
   const homePage=await loginPage.fillCredentials(" ahamedsabid652@agentforce.com","Ahamed@123");
-  //await homePage.expectServiceTitleToBeVisible();
+  await homePage.expectServiceTitleToBeVisible();
   //page.close();
-  
 });
