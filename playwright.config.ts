@@ -8,19 +8,26 @@ import { defineConfig, devices } from '@playwright/test';
 // import path from 'path';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
 
+if(!process.env.NODE_ENV) {
+  console.log("Running in QA environment");
+  require('dotenv').config({ path: `${__dirname}//src//config//.env` });
+} else  {
+  console.log("Running in QA environment");
+  require('dotenv').config({ path: `${__dirname}//src//config//.env.${process.env.NODE_ENV}` });
+}
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
   testDir: './src/tests',
   /* Run tests in files in parallel */
-  fullyParallel: true,
+  fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 2 : 2,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 5 : 5,
+  workers: process.env.CI ? 5 : 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter:'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -45,7 +52,7 @@ export default defineConfig({
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
-    },
+    }/*,
 
     {
       name: 'webkit',

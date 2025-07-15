@@ -1,6 +1,8 @@
 import { Page,test,expect} from "@playwright/test";
 import GooglePage from "../pages/GooglePage";
+import dotenv from 'dotenv';
 
+dotenv.config();
 
 test.describe("getByRole examples",async()=>{
 
@@ -8,8 +10,8 @@ test.describe("getByRole examples",async()=>{
 
     const gp=new GooglePage(page);
     await page.goto("https://www.google.com");
-    gp.googleSearch("LInkedIn");
-
+    gp.googleSearch(process.env.searchText!);
+    
 
 });
 });
