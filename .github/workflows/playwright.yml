@@ -19,7 +19,8 @@ jobs:
       run: npx playwright install --with-deps
     - name: set dotenv 
       run: set NODE_ENV=qa 
-           echo %NODE_ENV%
+    - name: echo dotenv 
+      run: echo %NODE_ENV%
     - name: Run Playwright tests
       run: npx playwright test getByRoleExamples.spec.ts
     - uses: actions/upload-artifact@v4
