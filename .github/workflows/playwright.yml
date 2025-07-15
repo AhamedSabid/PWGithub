@@ -17,10 +17,8 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
-    - name: set dotenv 
-      run: set NODE_ENV=qa 
-    - name: echo dotenv 
-      run: echo %NODE_ENV%
+    - name: Set NODE_ENV environment variable
+      run: echo "NODE_ENV=qa" >> $GITHUB_ENV # Correct way to set for subsequent steps
     - name: Run Playwright tests
       run: npx playwright test getByRoleExamples.spec.ts
     - uses: actions/upload-artifact@v4
